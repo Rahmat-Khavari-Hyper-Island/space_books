@@ -7,7 +7,7 @@ body {
   font-weight: 400;
   font-style: normal;
   color: white;
-  overflow-x: hidden; /* Hides horizontal scrollbar */
+  overflow-x: hidden;
 }
 
 .hero-section,
@@ -160,10 +160,10 @@ canvas {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   text-align: center;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 5px;
   box-sizing: border-box;
   font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .tiltcard:hover .book-description {
@@ -172,7 +172,7 @@ canvas {
 }
 
 footer {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
   color: white;
   text-align: center;
   padding: 20px;
@@ -184,4 +184,18 @@ footer {
 
 footer p {
   margin: 0;
+}
+
+.audio-btn {
+  font-weight: 700;
+  background-color: black;
+  color: white;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+.audio-btn:hover {
+  cursor: pointer;
 }
