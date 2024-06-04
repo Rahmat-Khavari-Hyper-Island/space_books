@@ -1,7 +1,5 @@
 let audioContext;
 let audioElement;
-
-const audioBtn = document.querySelector(".audio-btn");
 let isPlaying = false;
 
 function createAudio() {
@@ -14,15 +12,26 @@ function createAudio() {
   audioElement.loop = true;
 }
 
-createAudio();
+document.querySelector(".audio-btn").addEventListener("click", function () {
+  const audioBtn = document.querySelector(".audio-btn");
 
-audioBtn.addEventListener("click", function () {
+  if (!audioContext) {
+    createAudio();
+  }
+
   if (isPlaying) {
     audioBtn.textContent = "play audio";
     audioElement.pause();
   } else {
-    audioBtn.textContent = "pause audio";
-    audioElement.play();
+    audioElement
+      .play()
+      .then(() => {
+        audioBtn.textContent = "pause audio";
+        isPlaying = true;
+      })
+      .catch((err) => {
+        console.error("Audio playback error:", err);
+      });
   }
   isPlaying = !isPlaying;
 });
