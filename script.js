@@ -1,7 +1,6 @@
 let audioContext;
 let audioElement;
 let isPlaying = false;
-let manuallyPaused = false;
 
 function createAudio() {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -23,14 +22,12 @@ document.querySelector(".audio-btn").addEventListener("click", function () {
   if (isPlaying) {
     audioBtn.textContent = "play audio";
     audioElement.pause();
-    manuallyPaused = true;
   } else {
     audioElement
       .play()
       .then(() => {
         audioBtn.textContent = "pause audio";
         isPlaying = true;
-        manuallyPaused = false;
       })
       .catch((err) => {
         console.error("Audio playback error:", err);
@@ -39,29 +36,14 @@ document.querySelector(".audio-btn").addEventListener("click", function () {
   isPlaying = !isPlaying;
 });
 
-document.body.addEventListener("mouseover", function () {
-  if (!audioContext) {
-    createAudio();
-  }
-
-  if (!isPlaying && !manuallyPaused) {
-    audioElement
-      .play()
-      .then(() => {
-        isPlaying = true;
-        document.querySelector(".audio-btn").textContent = "pause audio";
-      })
-      .catch((err) => {
-        console.error("Audio playback error:", err);
-      });
-  }
-});
-
-//The old code:
+// !! This is the code that plays the audio as soon as the user hover on the body-
+// element of the website and user can pause and resume with the button but-
+// modern browsers don't allow the audio plays automatically !!
 
 // let audioContext;
 // let audioElement;
 // let isPlaying = false;
+// let manuallyPaused = false;
 
 // function createAudio() {
 //   audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -83,16 +65,36 @@ document.body.addEventListener("mouseover", function () {
 //   if (isPlaying) {
 //     audioBtn.textContent = "play audio";
 //     audioElement.pause();
+//     manuallyPaused = true;
 //   } else {
 //     audioElement
 //       .play()
 //       .then(() => {
 //         audioBtn.textContent = "pause audio";
 //         isPlaying = true;
+//         manuallyPaused = false;
 //       })
 //       .catch((err) => {
 //         console.error("Audio playback error:", err);
 //       });
 //   }
 //   isPlaying = !isPlaying;
+// });
+
+// document.body.addEventListener("mouseover", function () {
+//   if (!audioContext) {
+//     createAudio();
+//   }
+
+//   if (!isPlaying && !manuallyPaused) {
+//     audioElement
+//       .play()
+//       .then(() => {
+//         isPlaying = true;
+//         document.querySelector(".audio-btn").textContent = "pause audio";
+//       })
+//       .catch((err) => {
+//         console.error("Audio playback error:", err);
+//       });
+//   }
 // });
